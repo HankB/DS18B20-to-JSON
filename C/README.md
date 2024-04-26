@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* use `raspi-config` to emable 1-wire interface.
+* use `raspi-config` to enable 1-wire interface.
 * Install `WiringPi` (is really needed?)
 * Build tools (`build-essential`)
 
