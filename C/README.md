@@ -8,8 +8,7 @@
 
 ## Status
 
-* 2024-04-27 Initial coding complete, testing with disk file.
-* 2024-04-27 Test on actual H/W not successful. Complete path of the temperature not implemented.
+* 2024-04-27 Initial coding complete, tested and working on actual H/W.
 
 ## Build
 
@@ -18,6 +17,27 @@ gcc -Wall -o ds18b20_to_json ds18b20_to_json.c
 ```
 
 ## Usage
+
+Identify connected sensors using:
+
+```text
+hbarta@nbw:~ $ ls -l /sys/bus/w1/devices/
+total 0
+lrwxrwxrwx 1 root root 0 Apr 25 12:19 28-3c01b607c935 -> ../../../devices/w1_bus_master1/28-3c01b607c935
+lrwxrwxrwx 1 root root 0 Apr 26 16:57 28-3c01b607e46b -> ../../../devices/w1_bus_master1/28-3c01b607e46b
+lrwxrwxrwx 1 root root 0 Apr 26 16:57 w1_bus_master1 -> ../../../devices/w1_bus_master1
+hbarta@nbw:~ $ 
+```
+
+Sensor IDs here are `28-3c01b607c935` and `28-3c01b607e46b`. Temperature can be read from `/sys/bus/w1/devices/`\<sensor ID>`temperature`.
+
+```text
+hbarta@nbw:~ $ cat /sys/bus/w1/devices/28-3c01b607c935/temperature
+20625
+hbarta@nbw:~ $ 
+```
+
+Execute the program, passing the desired sensor ID.
 
 ```text
 ds18b20_to_json [device ID, required]
