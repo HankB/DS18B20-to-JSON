@@ -15,6 +15,7 @@ Build using
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 static const uint id_length = 15;           // typical 28-3c01b607c935
 static const char *sensor_path = "./test/"; // for testing
@@ -34,9 +35,9 @@ int main(int argc, char **argv)
     }
 
     // construct full file path
-    uint buf_len = strlen(sensor_path)+id_length+1;
+    uint buf_len = strlen(sensor_path) + id_length + 1;
     char *path_buf = malloc(buf_len);
-    if(path_buf == 0)
+    if (0 == path_buf)
     {
         fprintf(stderr, "can't malloc() memory\n");
         exit(ENOMEM);
@@ -44,6 +45,28 @@ int main(int argc, char **argv)
     path_buf[0] = 0; // null termiante empty string
     strncpy(path_buf, sensor_path, buf_len);
     strncat(path_buf, argv[1], id_length);
-    printf("\"%s\"\n", path_buf);
+
+    FILE *f = fopen(path_buf, "r"); // open for read
+
+    if (0 == f)
+    {
+        perror(path_buf);
+        free(path_buf);
+        return errno;
+    }
+    free(path_buf);
+
+    uint raw_val;
+    int rc = fscanf(f, "%d", &raw_val);
+    fclose(f);
+
+    if (1 != rc)
+    {
+        fprintf(stderr, "Can't read all values: %d\n", rc);
+        return -1;
+    }
+
+    printf("{\"t\":%ld, \"temp\":%.2f, \"device\":\"DS18B20\"}", time(0), (float)raw_val*9/5000+32);
+
     exit(0);
 }

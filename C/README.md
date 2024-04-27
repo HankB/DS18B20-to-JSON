@@ -6,6 +6,10 @@
 * Install `WiringPi` (is really needed?)
 * Build tools (`build-essential`)
 
+## Status
+
+* 2024-04-27 iitial coding complete, testing with disk file.
+
 ## Build
 
 ```text
