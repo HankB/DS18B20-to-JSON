@@ -18,13 +18,15 @@ Build using
 #include <string.h>
 #include <time.h>
 
-static const uint id_length = 15;           // typical 28-3c01b607c935
+static const uint id_length = 15; // typical 28-3c01b607c935
 
 #if defined TEST
 static const char *sensor_path = "./test/"; // for testing
 #else
-static const char *sensor_path = "/sys/bus/w1/devices/"; // for testing
+static const char *sensor_path = "/sys/bus/w1/devices/"; // actual path
 #endif
+
+static const char *sensor_temp = "/temperature"; // file name 
 
 void usage(char *progname, int error)
 {
@@ -41,7 +43,7 @@ int main(int argc, char **argv)
     }
 
     // construct full file path
-    uint buf_len = strlen(sensor_path) + id_length + 1;
+    uint buf_len = strlen(sensor_path) + id_length + strlen(sensor_temp) + 1;
     char *path_buf = malloc(buf_len);
     if (0 == path_buf)
     {
@@ -49,8 +51,9 @@ int main(int argc, char **argv)
         exit(ENOMEM);
     }
     path_buf[0] = 0; // null termiante empty string
-    strncpy(path_buf, sensor_path, buf_len);
+    strncpy(path_buf, sensor_path, strlen(sensor_path));
     strncat(path_buf, argv[1], id_length);
+    strncat(path_buf, sensor_temp, strlen(sensor_temp));
 
     FILE *f = fopen(path_buf, "r"); // open for read
 
@@ -72,7 +75,7 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    printf("{\"t\":%ld, \"temp\":%.2f, \"device\":\"DS18B20\"}", time(0), (float)raw_val*9/5000+32);
+    printf("{\"t\":%ld, \"temp\":%.2f, \"device\":\"DS18B20\"}", time(0), (float)raw_val * 9 / 5000 + 32);
 
     exit(0);
 }
