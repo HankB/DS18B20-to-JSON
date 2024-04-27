@@ -13,7 +13,7 @@
 ## Build
 
 ```text
-   gcc -Wall -o ds18b20_to_json ds18b20_to_json.c
+gcc -Wall -o ds18b20_to_json ds18b20_to_json.c
 ```
 
 ## Usage
@@ -21,4 +21,12 @@
 ```text
 ds18b20_to_json [device ID, required]
 ds18b20_to_json 28-3c01b607e46
+```
+
+### Test
+
+Add `-D TEST` to build command line to test with a local file.
+
+```text
+gcc -D TEST -Wall -o ds18b20_to_json ds18b20_to_json.c
 ```

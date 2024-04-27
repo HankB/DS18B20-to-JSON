@@ -9,6 +9,7 @@ Command line arguments
 
 Build using
    gcc -Wall -o ds18b20_to_json ds18b20_to_json.c
+   gcc -D TEST -Wall -o ds18b20_to_json ds18b20_to_json.c
 */
 
 #include <stdio.h>
@@ -18,7 +19,12 @@ Build using
 #include <time.h>
 
 static const uint id_length = 15;           // typical 28-3c01b607c935
+
+#if defined TEST
 static const char *sensor_path = "./test/"; // for testing
+#else
+static const char *sensor_path = "/sys/bus/w1/devices/"; // for testing
+#endif
 
 void usage(char *progname, int error)
 {
