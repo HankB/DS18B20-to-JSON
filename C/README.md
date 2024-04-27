@@ -8,7 +8,8 @@
 
 ## Status
 
-* 2024-04-27 iitial coding complete, testing with disk file.
+* 2024-04-27 Initial coding complete, testing with disk file.
+* 2024-04-27 Test on actual H/W not successful. Complete path of the temperature not implemented.
 
 ## Build
 
