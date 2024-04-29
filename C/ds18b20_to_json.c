@@ -75,7 +75,7 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    printf("{\"t\":%ld, \"temp\":%.2f, \"device\":\"DS18B20\"}", time(0), (float)raw_val * 9 / 5000 + 32);
+    printf("{\"t\":%ld, \"temp\":%.2f, \"device\":\"DS18B20\", \"DS18B20_ID\":\"%s\"}", time(0), (float)raw_val * 9 / 5000 + 32, argv[1]);
 
     exit(0);
 }
