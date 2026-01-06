@@ -7,7 +7,7 @@
 
 ## Status
 
-* 2026-01-06 Fix segfault and working on 32 bit Pi.
+* 2026-01-06 Fix segfault and working on 32 bit Pi, TEST works on 64 bit desktop.
 * 2026-01-06 Builds on RPiOS Trixie (32 bit) and segfaults. Fix in progress.
 * 2024-04-27 Initial coding complete, tested and working on actual H/W.
 

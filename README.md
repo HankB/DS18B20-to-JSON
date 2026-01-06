@@ -37,4 +37,5 @@ Where `t` is a time stamp in `time_t` seconds.
 
 ## Status
 
+* 2026-01-06 'C' version upgraded for RPiOS Trixie and working.
 * 2024-04-26 Plans
