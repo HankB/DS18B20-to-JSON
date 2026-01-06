@@ -7,6 +7,7 @@
 
 ## Status
 
+* 2026-01-06 Builds on RPiOS Trixie (32 bit) and segfaults. Fix in progress.
 * 2024-04-27 Initial coding complete, tested and working on actual H/W.
 
 ## Build
