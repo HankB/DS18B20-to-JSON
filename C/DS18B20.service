@@ -1,0 +1,16 @@
+[Unit]
+Description=My One Minute Task
+
+[Service]
+Type=oneshot
+# Check if the host 'mqtt' is reachable before running
+ExecStartPre=/usr/bin/ping -c 1 -W 1 mqtt
+
+ExecStart=/bin/bash -c "\
+    %h/bin/ds18b20_to_json 28-000000572fde | \
+    /usr/bin/mosquitto_pub \
+    -t HA/pullman/front_hall/temperature \
+    -s -h mqtt"
+    
+[Install]
+WantedBy=default.target

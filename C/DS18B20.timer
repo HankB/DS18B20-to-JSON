@@ -1,0 +1,15 @@
+[Unit]
+Description=Runs mytask every minute
+
+[Timer]
+# Option A: Run exactly at the start of every minute
+OnCalendar=*-*-* *:*:00
+
+# Option B: Run 1 minute after the previous run finished
+# OnUnitInactiveSec=1m
+
+# Accuracy prevents the system from "grouping" tasks to save power
+AccuracySec=3s
+
+[Install]
+WantedBy=timers.target

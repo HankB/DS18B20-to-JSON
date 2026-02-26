@@ -7,6 +7,7 @@
 
 ## Status
 
+* 2026-02-25 Add Systemd service and timer file.
 * 2026-01-06 Fix segfault and working on 32 bit Pi, TEST works on 64 bit desktop.
 * 2026-01-06 Builds on RPiOS Trixie (32 bit) and segfaults. Fix in progress.
 * 2024-04-27 Initial coding complete, tested and working on actual H/W.
@@ -51,4 +52,15 @@ Add `-D TEST` to build command line to test with a local file.
 
 ```text
 gcc -D TEST -Wall -o ds18b20_to_json ds18b20_to_json.c
+```
+
+## Deploy with Systemd
+
+```text
+mkdir -p ~/.config/systemd/user/
+cp DS18B20.timer DS18B20.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now DS18B20.timer
+systemctl --user status DS18B20.timer
+sudo loginctl enable-linger $USER
 ```
